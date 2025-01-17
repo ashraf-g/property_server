@@ -30,9 +30,9 @@ User.signup = function (newUser, result) {
   });
 };
 
-User.login = function (email, password, result) {
-  const query = "SELECT * FROM users WHERE email = ?";
-  sql.query(query, [email], (err, res) => {
+User.login = function (email, password, role, result) {
+  const query = "SELECT * FROM users WHERE email = ? AND role = ?";
+  sql.query(query, [email, role], (err, res) => {
     if (err) {
       return result(err, null);
     }

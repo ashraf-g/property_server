@@ -23,14 +23,12 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ message: "Email and password are required." });
+  const { email, password, role } = req.body;
+  if (!email || !password || !role) {
+    return res.status(400).json({ message: "All fields are required." });
   }
 
-  User.login(email, password, (err, user) => {
+  User.login(email, password, role, (err, user) => {
     if (err) {
       return res.status(400).json({ message: err.message });
     }
